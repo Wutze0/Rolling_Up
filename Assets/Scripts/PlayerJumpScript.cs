@@ -6,7 +6,7 @@ public class PlayerJumpScript : MonoBehaviour
     private const float jumpHeight = 10f;
     private const KeyCode jumpKey = KeyCode.Space;
     private bool isGrounded; //variable to prevent double jumping / jumping in the air
-
+    public bool isGrounded; //variable to prevent double jumping / jumping in the air
     void Update()
     {
         if (Input.GetKeyDown(jumpKey) && isGrounded)

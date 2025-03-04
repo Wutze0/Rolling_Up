@@ -10,12 +10,17 @@ public class PlayerMovementScript : MonoBehaviour
     private bool _buttonpressed;
     private int direction;
     private const float acceleration = (float)0.5;
+    public float acceleration = 0.9f;
     private const KeyCode moveLeft = KeyCode.LeftArrow;
     private const KeyCode moveRight = KeyCode.RightArrow;
+    private PlayerJumpScript jumpScript; //Reference to the jumpScript
+    private const float inAirAccelerationMultiplayer = 0.1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        jumpScript = GetComponent<PlayerJumpScript>(); // Access to the jumpScript
+
         _player.freezeRotation = true; //freeze the rotation of Sisyphos
     }
 
@@ -44,10 +49,23 @@ public class PlayerMovementScript : MonoBehaviour
             if (timeDifference > 0.1)
             {
                 _player.linearVelocityX += acceleration * direction;
+                if (jumpScript.isGrounded)
+                {
+                    _player.linearVelocityX += acceleration * direction;
+                }
+                else
+                {
+                    _player.linearVelocityX += acceleration * inAirAccelerationMultiplayer * direction;
+
+                }
+
+
+
 
                 timeDifference = 0;
             }
         }
+        
         _stone.transform.Rotate(0, 0, _player.linearVelocityX * stoneRotationSpeedMultiplier * -1); //-1 because a positive rotation turns to the left but we want it to turn to the right
     }
 }
