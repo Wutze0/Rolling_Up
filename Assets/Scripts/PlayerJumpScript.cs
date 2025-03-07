@@ -12,7 +12,7 @@ public class PlayerJumpScript : MonoBehaviour
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
             _player.linearVelocityY = jumpHeight;
-            isGrounded = false; 
+            isGrounded = false;
         }
     }
 

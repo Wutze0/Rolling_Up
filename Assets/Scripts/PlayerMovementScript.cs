@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerMovementScript : MonoBehaviour
 {
@@ -13,7 +12,10 @@ public class PlayerMovementScript : MonoBehaviour
     private const KeyCode moveLeft = KeyCode.LeftArrow;
     private const KeyCode moveRight = KeyCode.RightArrow;
     private PlayerJumpScript jumpScript; //Reference to the jumpScript
-    private const float inAirAccelerationMultiplayer = 0.1f;
+    private const float inAirAccelerationMultiplier = 0.1f;
+    private int collidingIcePlatformsAmount = 0;
+    private float iceAccelarationMultiplier = 0.5f;
+    private bool isOnIce;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,25 +50,61 @@ public class PlayerMovementScript : MonoBehaviour
             {
                 float appliedAcceleration = acceleration * direction;
 
-                    if (!jumpScript.isGrounded)
-                    {
-                        appliedAcceleration *= inAirAccelerationMultiplayer;
-                    }
+                if (!jumpScript.isGrounded)
+                {
+                    appliedAcceleration *= inAirAccelerationMultiplier;
+                }
 
-
-
-
-                    _player.linearVelocityX += appliedAcceleration;
-                    timeDifference = 0;
+                if (isOnIce)
+                {
+                    appliedAcceleration *= iceAccelarationMultiplier;
                 }
 
                 _player.linearVelocityX += appliedAcceleration;
                 timeDifference = 0;
             }
         }
-
         _stone.transform.Rotate(0, 0, _player.linearVelocityX * stoneRotationSpeedMultiplier * -1);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("Ground_Slippery"))
+        {
+            collidingIcePlatformsAmount++;
+        }
+        if (collidingIcePlatformsAmount > 0)
+        {
+            isOnIce = true;
+        }
+        else
+        {
+            isOnIce = false;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground_Slippery"))
+        {
+            collidingIcePlatformsAmount--;
+        }
+
+
+        if (collidingIcePlatformsAmount > 0)
+        {
+            isOnIce = true;
+        }
+        else
+        {
+            isOnIce = false;
+        }
+
+    }
+
+
+}
 
 
 
