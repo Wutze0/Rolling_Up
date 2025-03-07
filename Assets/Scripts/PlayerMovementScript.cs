@@ -28,6 +28,7 @@ public class PlayerMovementScript : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(moveRight) || Input.GetKeyDown(moveLeft))
+        if (Input.GetKey(moveRight))
         {
             _buttonpressed = true;
 
@@ -36,9 +37,16 @@ public class PlayerMovementScript : MonoBehaviour
                 direction = 1; //1: player moves to the right
             }
             else { direction = -1; } //-1: player moves to the left
+            direction = 1;
         }
 
         if (Input.GetKeyUp(moveRight) || Input.GetKeyUp(moveLeft))
+        else if (Input.GetKey(moveLeft))
+        {
+            _buttonpressed = true;
+            direction = -1;
+        }
+        else
         {
             _buttonpressed = false;
         }
@@ -46,7 +54,6 @@ public class PlayerMovementScript : MonoBehaviour
         if (_buttonpressed)
         {
             timeDifference += Time.deltaTime;
-            if (timeDifference > 0.1)
             {
                 _player.linearVelocityX += acceleration * direction;
                 if (jumpScript.isGrounded)
@@ -56,16 +63,20 @@ public class PlayerMovementScript : MonoBehaviour
                 else
                 {
                     _player.linearVelocityX += acceleration * inAirAccelerationMultiplayer * direction;
+                float appliedAcceleration = acceleration * direction;
 
+                if (!jumpScript.isGrounded)
+                {
+                    appliedAcceleration *= inAirAccelerationMultiplayer;
                 }
 
 
 
 
+                _player.linearVelocityX += appliedAcceleration;
                 timeDifference = 0;
             }
         }
-        
-        _stone.transform.Rotate(0, 0, _player.linearVelocityX * stoneRotationSpeedMultiplier * -1); //-1 because a positive rotation turns to the left but we want it to turn to the right
     }
+
 }
