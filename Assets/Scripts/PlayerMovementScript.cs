@@ -9,7 +9,6 @@ public class PlayerMovementScript : MonoBehaviour
     private float timeDifference = 0;
     private bool _buttonpressed;
     private int direction;
-    private const float acceleration = (float)0.5;
     public float acceleration = 0.9f;
     private const KeyCode moveLeft = KeyCode.LeftArrow;
     private const KeyCode moveRight = KeyCode.RightArrow;
@@ -27,20 +26,11 @@ public class PlayerMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(moveRight) || Input.GetKeyDown(moveLeft))
         if (Input.GetKey(moveRight))
         {
             _buttonpressed = true;
-
-            if (Input.GetKeyDown(moveRight))
-            {
-                direction = 1; //1: player moves to the right
-            }
-            else { direction = -1; } //-1: player moves to the left
             direction = 1;
         }
-
-        if (Input.GetKeyUp(moveRight) || Input.GetKeyUp(moveLeft))
         else if (Input.GetKey(moveLeft))
         {
             _buttonpressed = true;
@@ -54,15 +44,8 @@ public class PlayerMovementScript : MonoBehaviour
         if (_buttonpressed)
         {
             timeDifference += Time.deltaTime;
+            if (timeDifference > 0.1f)
             {
-                _player.linearVelocityX += acceleration * direction;
-                if (jumpScript.isGrounded)
-                {
-                    _player.linearVelocityX += acceleration * direction;
-                }
-                else
-                {
-                    _player.linearVelocityX += acceleration * inAirAccelerationMultiplayer * direction;
                 float appliedAcceleration = acceleration * direction;
 
                 if (!jumpScript.isGrounded)
@@ -70,13 +53,13 @@ public class PlayerMovementScript : MonoBehaviour
                     appliedAcceleration *= inAirAccelerationMultiplayer;
                 }
 
-
-
-
                 _player.linearVelocityX += appliedAcceleration;
                 timeDifference = 0;
             }
         }
+
+        _stone.transform.Rotate(0, 0, _player.linearVelocityX * stoneRotationSpeedMultiplier * -1);
     }
 
 }
+
