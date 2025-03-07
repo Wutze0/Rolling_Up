@@ -7,6 +7,7 @@ public class PlayerJumpScript : MonoBehaviour
     private const KeyCode jumpKey = KeyCode.Space;
     private bool isGrounded; //variable to prevent double jumping / jumping in the air
     public bool isGrounded; //variable to prevent double jumping / jumping in the air
+    private int collidingPlatformsAmount = 0;
     void Update()
     {
         if (Input.GetKeyDown(jumpKey) && isGrounded)
@@ -16,11 +17,38 @@ public class PlayerJumpScript : MonoBehaviour
         }
     }
 
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        isGrounded = true;
+    //    }
+
+    //}
+
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        isGrounded = false;
+    //    }
+    //}
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.CompareTag("Ground"))
         {
+            collidingPlatformsAmount++;
+        }
+        if (collidingPlatformsAmount > 0)
+        {
             isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
         }
     }
 
@@ -28,7 +56,24 @@ public class PlayerJumpScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            collidingPlatformsAmount--;
+        }
+
+
+        if (collidingPlatformsAmount > 0)
+        {
+            isGrounded = true;
+        }
+        else
+        {
             isGrounded = false;
         }
+
     }
+
+    //private void OnCollisionStay(Collision collisionInfo)
+    //{
+    //    // Debug-draw all contact points and normals
+    //    isGrounded = true;
+    //}
 }
