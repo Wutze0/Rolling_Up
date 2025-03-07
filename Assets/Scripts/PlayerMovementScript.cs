@@ -29,12 +29,6 @@ public class PlayerMovementScript : MonoBehaviour
         if (Input.GetKey(moveRight))
         {
             _buttonpressed = true;
-
-            if (Input.GetKeyDown(moveRight))
-            {
-                direction = 1; //1: player moves to the right
-            }
-            else { direction = -1; } //-1: player moves to the left
             direction = 1;
         }
         else if (Input.GetKey(moveLeft))
@@ -50,16 +44,9 @@ public class PlayerMovementScript : MonoBehaviour
         if (_buttonpressed)
         {
             timeDifference += Time.deltaTime;
+            if (timeDifference > 0.1f)
             {
-                _player.linearVelocityX += acceleration * direction;
-                if (jumpScript.isGrounded)
-                {
-                    _player.linearVelocityX += acceleration * direction;
-                }
-                else
-                {
-                    _player.linearVelocityX += acceleration * inAirAccelerationMultiplayer * direction;
-                    float appliedAcceleration = acceleration * direction;
+                float appliedAcceleration = acceleration * direction;
 
                     if (!jumpScript.isGrounded)
                     {
@@ -72,8 +59,14 @@ public class PlayerMovementScript : MonoBehaviour
                     _player.linearVelocityX += appliedAcceleration;
                     timeDifference = 0;
                 }
+
+                _player.linearVelocityX += appliedAcceleration;
+                timeDifference = 0;
             }
         }
 
+        _stone.transform.Rotate(0, 0, _player.linearVelocityX * stoneRotationSpeedMultiplier * -1);
     }
-}
+
+
+
