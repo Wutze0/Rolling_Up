@@ -41,6 +41,7 @@ public class PlayerJumpScript : MonoBehaviour
         {
             collidingPlatformsAmount++;
         }
+
         if (collidingPlatformsAmount > 0)
         {
             isGrounded = true;
@@ -53,7 +54,7 @@ public class PlayerJumpScript : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") )
         {
             collidingPlatformsAmount--;
         }

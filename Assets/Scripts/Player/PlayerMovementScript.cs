@@ -4,7 +4,7 @@ public class PlayerMovementScript : MonoBehaviour
 {
     public Rigidbody2D _player;
     public GameObject _stone;
-    private const float stoneRotationSpeedMultiplier = 5;
+    private const float stoneRotationSpeedMultiplier = 0.8f;
     private float timeDifference = 0;
     private bool _buttonpressed;
     private int direction;
@@ -13,9 +13,7 @@ public class PlayerMovementScript : MonoBehaviour
     private const KeyCode moveRight = KeyCode.RightArrow;
     private PlayerJumpScript jumpScript; //Reference to the jumpScript
     private const float inAirAccelerationMultiplier = 0.1f;
-    private int collidingIcePlatformsAmount = 0;
-    private float iceAccelarationMultiplier = 0.5f;
-    private bool isOnIce;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,10 +53,6 @@ public class PlayerMovementScript : MonoBehaviour
                     appliedAcceleration *= inAirAccelerationMultiplier;
                 }
 
-                if (isOnIce)
-                {
-                    appliedAcceleration *= iceAccelarationMultiplier;
-                }
 
                 _player.linearVelocityX += appliedAcceleration;
                 timeDifference = 0;
@@ -67,41 +61,7 @@ public class PlayerMovementScript : MonoBehaviour
         _stone.transform.Rotate(0, 0, _player.linearVelocityX * stoneRotationSpeedMultiplier * -1);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-        if (collision.gameObject.CompareTag("Ground_Slippery"))
-        {
-            collidingIcePlatformsAmount++;
-        }
-        if (collidingIcePlatformsAmount > 0)
-        {
-            isOnIce = true;
-        }
-        else
-        {
-            isOnIce = false;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground_Slippery"))
-        {
-            collidingIcePlatformsAmount--;
-        }
-
-
-        if (collidingIcePlatformsAmount > 0)
-        {
-            isOnIce = true;
-        }
-        else
-        {
-            isOnIce = false;
-        }
-
-    }
+    
 
 
 }

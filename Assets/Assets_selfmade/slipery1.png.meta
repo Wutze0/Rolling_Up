@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      slipery1_0: 1610740690268596061
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
