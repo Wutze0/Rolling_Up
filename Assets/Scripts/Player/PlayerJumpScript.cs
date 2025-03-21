@@ -37,12 +37,12 @@ public class PlayerJumpScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Ground"))
+
+        if (collision.gameObject.CompareTag("Ground") )
         {
             collidingPlatformsAmount++;
         }
-
-        if (collidingPlatformsAmount > 0)
+        if (collidingPlatformsAmount > 0 && collision.GetContact(0).normal.y == 1)
         {
             isGrounded = true;
         }
@@ -50,11 +50,17 @@ public class PlayerJumpScript : MonoBehaviour
         {
             isGrounded = false;
         }
+
+
+
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") )
+
+
+        if (collision.gameObject.CompareTag("Ground"))
         {
             collidingPlatformsAmount--;
         }
