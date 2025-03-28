@@ -26,10 +26,10 @@ public class PlayerJumpScript : MonoBehaviour
 
     }
 
-    public bool isGrounded()
-    {
-        return Physics2D.OverlapCircle(_groundCheck.position, 0.2f, _groundLayer);
-    }
+    //public bool isGrounded()
+    //{
+    //    return Physics2D.OverlapCircle(_groundCheck.position, 0.2f, _groundLayer);
+    //}
 
     //private void OnCollisionEnter2D(Collision2D collision)
     //{
@@ -49,8 +49,8 @@ public class PlayerJumpScript : MonoBehaviour
     //    }
     //}
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
 
 
         if (collision.gameObject.CompareTag("Ground"))
@@ -98,7 +98,7 @@ public class PlayerJumpScript : MonoBehaviour
     //        isGrounded = false;
     //    }
 
-    //}
+    }
 
 
 }

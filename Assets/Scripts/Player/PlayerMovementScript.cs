@@ -48,7 +48,7 @@ public class PlayerMovementScript : MonoBehaviour
             {
                 float appliedAcceleration = acceleration * direction;
 
-                if (!jumpScript.isGrounded())
+                if (!jumpScript.isGrounded)
                 {
                     appliedAcceleration *= inAirAccelerationMultiplier;
                 }
