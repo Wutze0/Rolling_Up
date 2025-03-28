@@ -1276,6 +1276,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5001258373318426638, guid: ba7d4a4d1b3c47548ac64e09cb0daf2f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5001258373318426638, guid: ba7d4a4d1b3c47548ac64e09cb0daf2f, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7033597092628478341, guid: ba7d4a4d1b3c47548ac64e09cb0daf2f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1368,6 +1376,8 @@ SceneRoots:
   - {fileID: 1112057356}
   - {fileID: 5356972954094257485}
   - {fileID: 635825350}
+  - {fileID: 915448517}
+  - {fileID: 204582003}
   - {fileID: 1320334632}
   - {fileID: 103691901}
   - {fileID: 5169570196763053100}
