@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2481840147631532543}
   - component: {fileID: 4576838445819840410}
   - component: {fileID: 801837553818152556}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SlipperyPlatform
   m_TagString: Ground
   m_Icon: {fileID: 0}

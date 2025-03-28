@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 431788593762135137}
   - component: {fileID: 2997605286129145312}
   - component: {fileID: 5021446535778868532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BreakingPlatform
   m_TagString: Ground
   m_Icon: {fileID: 0}

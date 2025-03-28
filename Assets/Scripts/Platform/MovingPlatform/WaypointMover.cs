@@ -1,15 +1,18 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WaypointMover : MonoBehaviour
 {
 
     public Transform waypointParent;
+    public GameObject platform;
     private float moveSpeed = 2f;
     private float waitTime = 2f;
     private bool loopWaypoints = true;
 
     private Transform[] waypoints;
+    private Transform target;
     private int currentWaypointIndex = 0;
     private bool isWaiting;
 
@@ -18,8 +21,8 @@ public class WaypointMover : MonoBehaviour
     void Start()
     {
         waypoints = new Transform[waypointParent.childCount];
-        
-        for(int i = 0; i < waypointParent.childCount; i++)
+
+        for (int i = 0; i < waypointParent.childCount; i++)
         {
             waypoints[i] = waypointParent.GetChild(i);
         }
@@ -37,11 +40,11 @@ public class WaypointMover : MonoBehaviour
 
     void MoveToWaypoint()
     {
-        Transform target = waypoints[currentWaypointIndex];
+        target = waypoints[currentWaypointIndex];
 
-        transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+        platform.transform.position = Vector2.MoveTowards(platform.transform.position, target.position, moveSpeed * Time.deltaTime);
 
-        if(Vector2.Distance(transform.position, target.position) < 0.1f)
+        if (Vector2.Distance(platform.transform.position, target.position) < 0.1f)
         {
             StartCoroutine(WaitAtWaypoint());
         }
@@ -56,4 +59,9 @@ public class WaypointMover : MonoBehaviour
 
         isWaiting = false;
     }
+
+    
+
+
+
 }
