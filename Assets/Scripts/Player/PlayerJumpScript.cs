@@ -89,14 +89,14 @@ public class PlayerJumpScript : MonoBehaviour
         }
 
 
-    //    if (collidingPlatformsAmount > 0)
-    //    {
-    //        isGrounded = true;
-    //    }
-    //    else
-    //    {
-    //        isGrounded = false;
-    //    }
+        if (collidingPlatformsAmount > 0)
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
 
     }
 
