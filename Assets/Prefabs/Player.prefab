@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1700321613422473398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7734370198926334204}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7734370198926334204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700321613422473398}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -6.69, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3720210791234625685}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2016809577251472110
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,9 +130,10 @@ GameObject:
   - component: {fileID: 1069653803004704568}
   - component: {fileID: 5001258373318426638}
   - component: {fileID: 7810345250982630748}
+  - component: {fileID: 6918686521051913066}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +153,7 @@ Transform:
   m_Children:
   - {fileID: 1882027420751199133}
   - {fileID: 120896357968948971}
+  - {fileID: 7734370198926334204}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1069653803004704568
@@ -138,7 +171,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 7cde3eb097a79714cb248d1136e0c9da, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -198,9 +231,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5ec3bc5ea8aa147be56e7d0e19c63a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _stone: {fileID: 0}
+  _player: {fileID: 1069653803004704568}
+  _stone: {fileID: 8383544598249765969}
   acceleration: 0.9
+--- !u!114 &6918686521051913066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7033597092628478341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c23c6cc23dd9c4eab643aed02a818e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 1069653803004704568}
+  _groundCheck: {fileID: 7734370198926334204}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8383544598249765969
 GameObject:
   m_ObjectHideFlags: 0

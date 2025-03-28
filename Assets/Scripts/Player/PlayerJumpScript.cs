@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerJumpScript : MonoBehaviour
 {
     public Rigidbody2D _player;
+    public Transform _groundCheck;
+    public LayerMask _groundLayer;
     private const float jumpHeight = 10f;
     private const KeyCode jumpKey = KeyCode.Space;
     public bool isGrounded; //variable to prevent double jumping / jumping in the air
@@ -16,8 +18,17 @@ public class PlayerJumpScript : MonoBehaviour
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
             _player.linearVelocityY = jumpHeight;
-            isGrounded = false;
         }
+
+
+
+
+
+    }
+
+    public bool isGrounded()
+    {
+        return Physics2D.OverlapCircle(_groundCheck.position, 0.2f, _groundLayer);
     }
 
     //private void OnCollisionEnter2D(Collision2D collision)
@@ -38,8 +49,8 @@ public class PlayerJumpScript : MonoBehaviour
     //    }
     //}
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
 
 
         if (collision.gameObject.CompareTag("Ground"))
@@ -78,16 +89,16 @@ public class PlayerJumpScript : MonoBehaviour
         }
 
 
-        if (collidingPlatformsAmount > 0)
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
+    //    if (collidingPlatformsAmount > 0)
+    //    {
+    //        isGrounded = true;
+    //    }
+    //    else
+    //    {
+    //        isGrounded = false;
+    //    }
 
-    }
+    //}
 
 
 }
