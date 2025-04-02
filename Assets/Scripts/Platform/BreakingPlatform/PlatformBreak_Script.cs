@@ -42,6 +42,8 @@ public class PlatformBreak_Script : MonoBehaviour
         // Hide platform and reset position
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0;
+        rb.rotation = 0;
         transform.position = initialPosition;
         col.enabled = false; // Disable collision
         sr.enabled = false;
