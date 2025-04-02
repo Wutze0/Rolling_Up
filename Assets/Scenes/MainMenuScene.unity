@@ -828,20 +828,6 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 1069653803004704568, guid: ba7d4a4d1b3c47548ac64e09cb0daf2f, type: 3}
   m_PrefabInstance: {fileID: 5356972954094257485}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1878303162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 627570288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7c23c6cc23dd9c4eab643aed02a818e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 1878303158}
-  isGrounded: 0
 --- !u!114 &1878303166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,7 +850,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 627570288}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -920,7 +906,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 627570288}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8034b498ecd4e4244801e8f25911a64a, type: 2}
   m_CullingMode: 0
@@ -1116,13 +1102,10 @@ PrefabInstance:
       value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 2685192412195026801, guid: ba7d4a4d1b3c47548ac64e09cb0daf2f, type: 3}
+    - {fileID: 5005935890755650257, guid: ba7d4a4d1b3c47548ac64e09cb0daf2f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7033597092628478341, guid: ba7d4a4d1b3c47548ac64e09cb0daf2f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1878303162}
     - targetCorrespondingSourceObject: {fileID: 7033597092628478341, guid: ba7d4a4d1b3c47548ac64e09cb0daf2f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1878303166}
