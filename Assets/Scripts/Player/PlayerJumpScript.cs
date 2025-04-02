@@ -26,34 +26,11 @@ public class PlayerJumpScript : MonoBehaviour
 
     }
 
-    //public bool isGrounded()
-    //{
-    //    return Physics2D.OverlapCircle(_groundCheck.position, 0.2f, _groundLayer);
-    //}
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        isGrounded = true;
-    //    }
-
-    //}
-
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        isGrounded = false;
-    //    }
-    //}
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
 
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground")) //Only increment the collidingPlatformsAmount varaible if the player is touching ground
         {
             collidingPlatformsAmount++;
         }
@@ -89,7 +66,7 @@ public class PlayerJumpScript : MonoBehaviour
         }
 
 
-        if (collidingPlatformsAmount > 0)
+        if (collidingPlatformsAmount > 0) //If the player is touching at least 1 collision, he is still able to jump
         {
             isGrounded = true;
         }
