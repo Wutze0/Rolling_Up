@@ -6,7 +6,10 @@ public class PlayerMovementScript : MonoBehaviour
 {
     public Rigidbody2D _player;
     public GameObject _stone;
-    private const float stoneRotationSpeedMultiplier = 0.8f;
+    public Animator _animator;
+    public Transform _sisyphosTransform;
+    private float _sisyphosWalkingSpeedDivisor = 10;
+    private const float stoneRotationSpeedMultiplier = 0.4f;
     private float timeDifference = 0;
     private bool _buttonpressed;
     private int direction;
@@ -17,9 +20,11 @@ public class PlayerMovementScript : MonoBehaviour
     private const float inAirAccelerationMultiplier = 0.1f;
 
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _animator.StopPlayback();
         initializeKeybinds(); //Gets all the set Keybinds for moving left and right
         jumpScript = GetComponent<PlayerJumpScript>(); // Access to the jumpScript
 
@@ -29,16 +34,39 @@ public class PlayerMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(_player.linearVelocityX == 0)
+        {
+            _animator.speed = 0;
+        }
+        else if(_player.linearVelocityX > 0)
+        {
+            _animator.speed = _player.linearVelocityX /_sisyphosWalkingSpeedDivisor;
+           
+        }
+        else
+        {
+            _animator.speed = _player.linearVelocityX / -_sisyphosWalkingSpeedDivisor;
+            
+        }
+
+        
         if (Input.GetKey(moveRight))
         {
             _buttonpressed = true;
             direction = 1; //positive -> stone is moving to the right
+            if (_sisyphosTransform.rotation.y != 0)
+            {
+                _sisyphosTransform.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
         else if (Input.GetKey(moveLeft))
         {
-            Debug.Log(moveLeft.ToString());
             _buttonpressed = true;
             direction = -1; //negative -> stone is moving to the left
+            if (_sisyphosTransform.rotation.y != 180)
+            {
+                _sisyphosTransform.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
         }
         else
         {
