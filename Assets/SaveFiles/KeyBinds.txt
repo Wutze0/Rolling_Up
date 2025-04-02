@@ -1,0 +1,2 @@
+moveLeft: LeftArrow
+moveRight: RightArrow
