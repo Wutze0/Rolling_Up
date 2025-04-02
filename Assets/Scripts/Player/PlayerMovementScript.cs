@@ -1,3 +1,5 @@
+using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerMovementScript : MonoBehaviour
@@ -9,8 +11,8 @@ public class PlayerMovementScript : MonoBehaviour
     private bool _buttonpressed;
     private int direction;
     public float acceleration = 0.9f;
-    private const KeyCode moveLeft = KeyCode.LeftArrow;
-    private const KeyCode moveRight = KeyCode.RightArrow;
+    private KeyCode moveLeft = KeyCode.LeftArrow;
+    private KeyCode moveRight = KeyCode.RightArrow;
     private PlayerJumpScript jumpScript; //Reference to the jumpScript
     private const float inAirAccelerationMultiplier = 0.1f;
 
@@ -18,6 +20,7 @@ public class PlayerMovementScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        initializeKeybinds();
         jumpScript = GetComponent<PlayerJumpScript>(); // Access to the jumpScript
 
         _player.freezeRotation = true; //freeze the rotation of Sisyphos
@@ -33,6 +36,7 @@ public class PlayerMovementScript : MonoBehaviour
         }
         else if (Input.GetKey(moveLeft))
         {
+            Debug.Log(moveLeft.ToString());
             _buttonpressed = true;
             direction = -1;
         }
@@ -61,8 +65,49 @@ public class PlayerMovementScript : MonoBehaviour
         _stone.transform.Rotate(0, 0, _player.linearVelocityX * stoneRotationSpeedMultiplier * -1);
     }
 
-    
+    public void setMoveLeftKey(KeyCode key)
+    {
+        moveLeft = key;
+        saveKeybinds();
 
+    }
+
+    public void setMoveRightKey(KeyCode key)
+    {
+        moveRight = key;
+        saveKeybinds();
+    }
+
+    private void initializeKeybinds() //Method to get and set the set keybinds for the game.
+    {
+        string content = File.ReadAllText(Application.dataPath + "/SaveFiles/Keybinds.txt");
+        string[] lines = new string[2];         //String size might have to be increased because we are not saving the jump button yet
+        lines = content.Split('\n', System.StringSplitOptions.RemoveEmptyEntries);
+        string[] keys = new string[100]; //might have to change this
+
+        int i = 0;
+        foreach (string l in lines) //foreach to get all the actural keybinds
+        {
+            keys[i] = l.Split(':', System.StringSplitOptions.RemoveEmptyEntries)[1].Trim();
+            i++;
+        }
+
+        setMoveLeftKey(stringToKeyCode(keys[0]));
+        setMoveRightKey(stringToKeyCode(keys[1]));
+
+    }
+
+    private KeyCode stringToKeyCode(string key) //Method to parse a string to KeyCode
+    {
+        KeyCode code = (KeyCode)System.Enum.Parse(typeof(KeyCode), key.Trim(), true);
+        Debug.Log(key);
+        return code;
+    }
+
+    private void saveKeybinds() //Method to save the changed keybinds
+    {
+        File.WriteAllText(Application.dataPath + "/SaveFiles/Keybinds.txt", "moveLeft: " + moveLeft.ToString() + "\nmoveRight: " +  moveRight.ToString());        
+    }
 
 }
 
