@@ -9,7 +9,7 @@ public class WaypointMover : MonoBehaviour
     public GameObject platform;
     private float moveSpeed = 2f;
     private float waitTime = 2f;
-    private bool loopWaypoints = true;
+    public bool loopWaypoints = true;
 
     private Transform[] waypoints;
     private Transform target;
@@ -60,7 +60,8 @@ public class WaypointMover : MonoBehaviour
         isWaiting = false;
     }
 
-    
+
+
 
 
 

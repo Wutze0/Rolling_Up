@@ -10,12 +10,13 @@ public class PlayerJumpScript : MonoBehaviour
     private const float jumpHeight = 10f;
     private const KeyCode jumpKey = KeyCode.Space;
     public bool isGrounded; //variable to prevent double jumping / jumping in the air
+    public bool canFly = false;
     private int collidingPlatformsAmount = 0;
 
     void Update()
     {
   
-        if (Input.GetKeyDown(jumpKey) && isGrounded)
+        if (Input.GetKeyDown(jumpKey) && (isGrounded || canFly))
         {
             _player.linearVelocityY = jumpHeight;
         }

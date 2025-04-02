@@ -37,13 +37,13 @@ public class PlatformBreak_Script : MonoBehaviour
         yield return new WaitForSeconds(breakDelay);
 
         rb.bodyType = RigidbodyType2D.Dynamic; // Make it fall
-        col.enabled = false; // Disable collision
         yield return new WaitForSeconds(2f);
 
         // Hide platform and reset position
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
         transform.position = initialPosition;
+        col.enabled = false; // Disable collision
         sr.enabled = false;
 
         yield return new WaitForSeconds(respawnTime); // Wait before respawning

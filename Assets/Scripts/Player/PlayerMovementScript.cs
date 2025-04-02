@@ -20,7 +20,7 @@ public class PlayerMovementScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        initializeKeybinds();
+        initializeKeybinds(); //Gets all the set Keybinds for moving left and right
         jumpScript = GetComponent<PlayerJumpScript>(); // Access to the jumpScript
 
         _player.freezeRotation = true; //freeze the rotation of Sisyphos
@@ -32,13 +32,13 @@ public class PlayerMovementScript : MonoBehaviour
         if (Input.GetKey(moveRight))
         {
             _buttonpressed = true;
-            direction = 1;
+            direction = 1; //positive -> stone is moving to the right
         }
         else if (Input.GetKey(moveLeft))
         {
             Debug.Log(moveLeft.ToString());
             _buttonpressed = true;
-            direction = -1;
+            direction = -1; //negative -> stone is moving to the left
         }
         else
         {
@@ -54,7 +54,7 @@ public class PlayerMovementScript : MonoBehaviour
 
                 if (!jumpScript.isGrounded)
                 {
-                    appliedAcceleration *= inAirAccelerationMultiplier;
+                    appliedAcceleration *= inAirAccelerationMultiplier; //If the player is in the air, the acceleration will decrease.
                 }
 
 
@@ -100,7 +100,6 @@ public class PlayerMovementScript : MonoBehaviour
     private KeyCode stringToKeyCode(string key) //Method to parse a string to KeyCode
     {
         KeyCode code = (KeyCode)System.Enum.Parse(typeof(KeyCode), key.Trim(), true);
-        Debug.Log(key);
         return code;
     }
 
