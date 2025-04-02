@@ -17,10 +17,10 @@ public class WaypointMover : MonoBehaviour
     private bool isWaiting;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
-        waypoints = new Transform[waypointParent.childCount];
+        waypoints = new Transform[waypointParent.childCount];           //Creating an array with the waypoints the platform will move to
 
         for (int i = 0; i < waypointParent.childCount; i++)
         {
@@ -33,29 +33,29 @@ public class WaypointMover : MonoBehaviour
     {
         if (isWaiting)
         {
-            return;
+            return;                 //If the platform is currently waiting, it should not move to the next waypoint
         }
         MoveToWaypoint();
     }
 
-    void MoveToWaypoint()
+    void MoveToWaypoint()//Moving the platform to the next waypoint and starting the wait method.
     {
-        target = waypoints[currentWaypointIndex];
+        target = waypoints[currentWaypointIndex];   
 
-        platform.transform.position = Vector2.MoveTowards(platform.transform.position, target.position, moveSpeed * Time.deltaTime);
+        platform.transform.position = Vector2.MoveTowards(platform.transform.position, target.position, moveSpeed * Time.deltaTime);//moves the platform to the position of the next waypoint
 
-        if (Vector2.Distance(platform.transform.position, target.position) < 0.1f)
+        if (Vector2.Distance(platform.transform.position, target.position) < 0.1f)//If close enough, the platform will start waiting
         {
             StartCoroutine(WaitAtWaypoint());
         }
     }
 
-    IEnumerator WaitAtWaypoint()
+    IEnumerator WaitAtWaypoint()    //Waiting at a Waypoint for x seconds and then selecting the next target position
     {
         isWaiting = true;
         yield return new WaitForSeconds(waitTime);
 
-        currentWaypointIndex = loopWaypoints ? (currentWaypointIndex + 1) % waypoints.Length : Mathf.Min(currentWaypointIndex + 1, waypoints.Length - 1);
+        currentWaypointIndex = loopWaypoints ? (currentWaypointIndex + 1) % waypoints.Length : Mathf.Min(currentWaypointIndex + 1, waypoints.Length - 1);//when not looping the platform stops at the last waypoint
 
         isWaiting = false;
     }
