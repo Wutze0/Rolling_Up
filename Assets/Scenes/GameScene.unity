@@ -660,7 +660,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &150697670
 Canvas:
   m_ObjectHideFlags: 0
@@ -670,7 +670,7 @@ Canvas:
   m_GameObject: {fileID: 150697667}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -692,8 +692,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150697667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 0.020957632, y: 0.020957632, z: 0.020957632}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1178796298}
@@ -702,8 +702,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1029.6964}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &186642265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2852,14 +2852,14 @@ RectTransform:
   m_GameObject: {fileID: 1178796297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 19.93286, y: 19.93286, z: 19.93286}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 150697671}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30.95, y: -8}
+  m_AnchoredPosition: {x: 17176, y: 1583}
   m_SizeDelta: {x: 2267.44, y: 1264.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1178796299
@@ -4702,11 +4702,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3720210791234625685, guid: ba7d4a4d1b3c47548ac64e09cb0daf2f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3720210791234625685, guid: ba7d4a4d1b3c47548ac64e09cb0daf2f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 33.7
+      value: 24.2
       objectReference: {fileID: 0}
     - target: {fileID: 3720210791234625685, guid: ba7d4a4d1b3c47548ac64e09cb0daf2f, type: 3}
       propertyPath: m_LocalPosition.z
