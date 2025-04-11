@@ -25,8 +25,8 @@ public class PlayerMovementScript : MonoBehaviour
     void Start()
     {
         _animator.StopPlayback();
-        initializeKeybinds(); //Gets all the set Keybinds for moving left and right
         jumpScript = GetComponent<PlayerJumpScript>(); // Access to the jumpScript
+        initializeKeybinds(); //Gets all the set Keybinds for moving left and right
 
         _player.freezeRotation = true; //freeze the rotation of Sisyphos
     }
@@ -106,10 +106,16 @@ public class PlayerMovementScript : MonoBehaviour
         saveKeybinds();
     }
 
+    public void setJumpKey(KeyCode key)
+    {
+        jumpScript.setJumpKey(key);
+        saveKeybinds();
+    }
+
     private void initializeKeybinds() //Method to get and set the set keybinds for the game.
     {
         string content = File.ReadAllText(Application.dataPath + "/SaveFiles/Keybinds.txt");
-        string[] lines = new string[2];         //String size might have to be increased because we are not saving the jump button yet
+        string[] lines = new string[3];         //String size might have to be increased because we are not saving the jump button yet
         lines = content.Split('\n', System.StringSplitOptions.RemoveEmptyEntries);
         string[] keys = new string[100]; //might have to change this
 
@@ -122,7 +128,7 @@ public class PlayerMovementScript : MonoBehaviour
 
         setMoveLeftKey(stringToKeyCode(keys[0]));
         setMoveRightKey(stringToKeyCode(keys[1]));
-
+        setJumpKey(stringToKeyCode(keys[2]));
     }
 
     private KeyCode stringToKeyCode(string key) //Method to parse a string to KeyCode
@@ -133,7 +139,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void saveKeybinds() //Method to save the changed keybinds
     {
-        File.WriteAllText(Application.dataPath + "/SaveFiles/Keybinds.txt", "moveLeft: " + moveLeft.ToString() + "\nmoveRight: " +  moveRight.ToString());        
+        File.WriteAllText(Application.dataPath + "/SaveFiles/Keybinds.txt", "moveLeft: " + moveLeft.ToString() + "\nmoveRight: " +  moveRight.ToString() + "\njumpKey: " + jumpScript.getJumpKey().ToString());        
     }
 
 }

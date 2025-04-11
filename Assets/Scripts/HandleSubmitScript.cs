@@ -9,6 +9,7 @@ public class HandleSubmitScript : MonoBehaviour
     private PlayerMovementScript movementScript;
     public TMP_InputField leftInputField;
     public TMP_InputField rightInputField;
+    public TMP_InputField middleInputField;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,5 +33,11 @@ public class HandleSubmitScript : MonoBehaviour
 
             movementScript.setMoveRightKey(code); //sets the new keybind
         }
+        else if (Input.GetKeyUp(KeyCode.Return) && middleInputField.isFocused)//changes the key, which is used to jump
+        {
+            KeyCode code = (KeyCode)System.Enum.Parse(typeof(KeyCode), middleInputField.text, true); //parses the input string into a KeyCode
+            movementScript.setJumpKey(code);
+        }
+
     }
 }
