@@ -1,2 +1,3 @@
 moveLeft: LeftArrow
 moveRight: RightArrow
+jumpKey: Space
