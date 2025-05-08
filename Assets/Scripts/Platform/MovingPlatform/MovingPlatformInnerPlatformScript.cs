@@ -12,7 +12,7 @@ public class MovingPlatformInnerPlatformScript : MonoBehaviour
     void Update()
     {
         
-    }
+    } 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

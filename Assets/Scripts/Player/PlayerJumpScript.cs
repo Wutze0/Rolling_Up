@@ -8,7 +8,7 @@ public class PlayerJumpScript : MonoBehaviour
     public Transform _groundCheck;
     public LayerMask _groundLayer;
     private const float jumpHeight = 10f;
-    private const KeyCode jumpKey = KeyCode.Space;
+    private KeyCode jumpKey = KeyCode.Space;
     public bool isGrounded; //variable to prevent double jumping / jumping in the air
     public bool canFly = false;
     private int collidingPlatformsAmount = 0;
@@ -76,6 +76,16 @@ public class PlayerJumpScript : MonoBehaviour
             isGrounded = false;
         }
 
+    }
+
+    public void setJumpKey(KeyCode key)
+    {
+        jumpKey = key;
+    }
+
+    public KeyCode getJumpKey()
+    {
+        return jumpKey;
     }
 
 
