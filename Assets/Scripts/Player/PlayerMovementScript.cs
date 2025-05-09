@@ -2,7 +2,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerMovementScript : MonoBehaviour
+public class PlayerMovementScript : MonoBehaviour, IDataPersistence
 {
     public Rigidbody2D _player;
     public GameObject _stone;
@@ -114,7 +114,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void initializeKeybinds() //Method to get and set the set keybinds for the game.
     {
-        string content = File.ReadAllText(Application.dataPath + "/SaveFiles/Keybinds.txt");
+        string content = File.ReadAllText(Application.dataPath + "/SaveFiles/Keybinds.txt");//TODO: USE PATH.COMBINE!!!!!!! --------------------------------------------------------------------------
         string[] lines = new string[3];         //String size might have to be increased because we are not saving the jump button yet
         lines = content.Split('\n', System.StringSplitOptions.RemoveEmptyEntries);
         string[] keys = new string[100]; //might have to change this
@@ -141,6 +141,20 @@ public class PlayerMovementScript : MonoBehaviour
     {
         File.WriteAllText(Application.dataPath + "/SaveFiles/Keybinds.txt", "moveLeft: " + moveLeft.ToString() + "\nmoveRight: " +  moveRight.ToString() + "\njumpKey: " + jumpScript.getJumpKey().ToString());        
     }
+
+    public void LoadData(GameData data) //Add more data that needs to be saved.
+    {
+
+        _player.position = data.playerPosition;
+        _player.linearVelocity = data.playerVelocity;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.playerVelocity = _player.linearVelocity;
+        data.playerPosition = _player.position;
+    }
+
 
 }
 
