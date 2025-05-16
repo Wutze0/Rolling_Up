@@ -1,10 +1,9 @@
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class WaypointMover : MonoBehaviour
+public class WaypointMover : MonoBehaviour, IDataPersistence
 {
-
     public Transform waypointParent;
     public GameObject platform;
     private float moveSpeed = 2f;
@@ -16,53 +15,75 @@ public class WaypointMover : MonoBehaviour
     private int currentWaypointIndex = 0;
     private bool isWaiting;
 
+    private string platformID;
 
-    
+    private bool dataLoaded = false;
+
     void Start()
     {
-        waypoints = new Transform[waypointParent.childCount];           //Creating an array with the waypoints the platform will move to
+        platformID = GenerateIDFromPosition(transform.position);
 
+        waypoints = new Transform[waypointParent.childCount];
         for (int i = 0; i < waypointParent.childCount; i++)
         {
             waypoints[i] = waypointParent.GetChild(i);
         }
+
+        if (!dataLoaded)
+        {
+            platform.transform.position = waypoints[0].position;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (isWaiting)
-        {
-            return;                 //If the platform is currently waiting, it should not move to the next waypoint
-        }
+        if (isWaiting || waypoints == null || waypoints.Length == 0) return;
+
         MoveToWaypoint();
     }
 
-    void MoveToWaypoint()//Moving the platform to the next waypoint and starting the wait method.
+    void MoveToWaypoint()
     {
-        target = waypoints[currentWaypointIndex];   
+        target = waypoints[currentWaypointIndex];
 
-        platform.transform.position = Vector2.MoveTowards(platform.transform.position, target.position, moveSpeed * Time.deltaTime);//moves the platform to the position of the next waypoint
+        platform.transform.position = Vector2.MoveTowards(platform.transform.position, target.position, moveSpeed * Time.deltaTime);
 
-        if (Vector2.Distance(platform.transform.position, target.position) < 0.1f)//If close enough, the platform will start waiting
+        if (Vector2.Distance(platform.transform.position, target.position) < 0.1f)
         {
             StartCoroutine(WaitAtWaypoint());
         }
     }
 
-    IEnumerator WaitAtWaypoint()    //Waiting at a Waypoint for x seconds and then selecting the next target position
+    IEnumerator WaitAtWaypoint()
     {
         isWaiting = true;
         yield return new WaitForSeconds(waitTime);
 
-        currentWaypointIndex = loopWaypoints ? (currentWaypointIndex + 1) % waypoints.Length : Mathf.Min(currentWaypointIndex + 1, waypoints.Length - 1);//when not looping the platform stops at the last waypoint
+        currentWaypointIndex = loopWaypoints
+            ? (currentWaypointIndex + 1) % waypoints.Length
+            : Mathf.Min(currentWaypointIndex + 1, waypoints.Length - 1);
 
         isWaiting = false;
     }
 
+    private string GenerateIDFromPosition(Vector3 pos)
+    {
+        return $"MovingPlatform_{Mathf.RoundToInt(pos.x)}_{Mathf.RoundToInt(pos.y)}_{Mathf.RoundToInt(pos.z)}";
+    }
 
+    public void SaveData(GameData data)
+    {
+        data.movingPlatformPositions[platformID] = platform.transform.position;
+        data.currentWaypointIndices[platformID] = currentWaypointIndex;
+    }
 
-
-
-
+    public void LoadData(GameData data)
+    {
+        if (data.movingPlatformPositions.ContainsKey(platformID) && data.currentWaypointIndices.ContainsKey(platformID))
+        {
+            platform.transform.position = data.movingPlatformPositions[platformID];
+            currentWaypointIndex = Mathf.Clamp(data.currentWaypointIndices[platformID], 0, waypointParent.childCount - 1);
+            dataLoaded = true;
+        }
+    }
 }
