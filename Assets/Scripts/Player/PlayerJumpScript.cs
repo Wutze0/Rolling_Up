@@ -1,18 +1,18 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerJumpScript : MonoBehaviour
 {
     public Rigidbody2D _player;
-    public Transform _groundCheck;
     public LayerMask _groundLayer;
     private const float jumpHeight = 10f;
     private KeyCode jumpKey = KeyCode.Space;
     public bool isGrounded; //variable to prevent double jumping / jumping in the air
     public bool canFly = false;
-    private int collidingPlatformsAmount = 0;
-
+    private float steepnessOfJumpablePlatforms = (float) 0.2; //The lower the value, the steeper the platform can be to still be jumpable, e.g.0 = Wall, 0.1 very steep slope
+    private HashSet<Collider2D> groundedColliders = new HashSet<Collider2D>();
     void Update()
     {
   
@@ -20,63 +20,101 @@ public class PlayerJumpScript : MonoBehaviour
         {
             _player.linearVelocityY = jumpHeight;
         }
-
-
-
-
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-
-        if (collision.gameObject.CompareTag("Ground")) //Only increment the collidingPlatformsAmount varaible if the player is touching ground
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            collidingPlatformsAmount++;
-        }
-        if (collidingPlatformsAmount > 0)
-        {
-            for(int i = 0; i < collision.GetContacts(collision.contacts); i++)
+            foreach (ContactPoint2D contact in collision.contacts)
             {
-                if(collision.GetContact(i).normal.y <= 1 && collision.GetContact(i).normal.y > 0.5) //Check for each collision, if it is touching the top, if not the player is not on the ground.
+                if (contact.normal.y > steepnessOfJumpablePlatforms)
                 {
-                    isGrounded = true;
-                    i = collision.GetContacts(collision.contacts) + 1; //Exit the for-loop.
+                    groundedColliders.Add(collision.collider);
+                    break;
                 }
-
             }
         }
-        else
-        {
-            isGrounded = false;
-        }
 
-
-
-
+        UpdateIsGrounded();
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-
-
-        if (collision.gameObject.CompareTag("Ground"))
+        if (groundedColliders.Contains(collision.collider))
         {
-            collidingPlatformsAmount--;
+            groundedColliders.Remove(collision.collider);
         }
 
-
-        if (collidingPlatformsAmount > 0) //If the player is touching at least 1 collision, he is still able to jump
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
-
+        UpdateIsGrounded();
     }
+
+    private void UpdateIsGrounded()
+    {
+        isGrounded = groundedColliders.Count > 0;
+    }
+
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+
+
+    //    if (collision.gameObject.CompareTag("Ground")) //Only increment the collidingPlatformsAmount varaible if the player is touching ground
+    //    {
+    //        for (int i = 0; i < collision.GetContacts(collision.contacts); i++)
+    //        {
+    //            if (collision.GetContact(i).normal.y <= 1 && collision.GetContact(i).normal.y > steepnessOfJumpablePlatforms) //Check for each collision, if it is touching the top, if not the player is not on the ground.
+    //            {
+    //                collidingPlatformsAmount++;
+    //                i = collision.GetContacts(collision.contacts) + 1; //Exit the for-loop.
+    //            }
+
+    //        }
+    //    }
+
+    //    if (collidingPlatformsAmount > 0)
+    //    {
+    //        isGrounded = true;
+    //    }
+    //    else
+    //    {
+    //        isGrounded = false;
+    //    }
+
+
+
+
+    //}
+
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+
+
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        for (int i = 0; i < collision.GetContacts(collision.contacts); i++)
+    //        {
+    //            if (collision.GetContact(i).normal.y <= 1 && collision.GetContact(i).normal.y > steepnessOfJumpablePlatforms) //Check for each collision, if it is touching the top, if not the player is not on the ground.
+    //            {
+    //                collidingPlatformsAmount--;
+    //                i = collision.GetContacts(collision.contacts) + 1; //Exit the for-loop.
+    //            }
+    //        }
+    //    }
+
+    //    if (collidingPlatformsAmount > 0) //If the player is touching at least 1 collision, he is still able to jump, if he is touching the platform at the top
+    //    {
+    //        isGrounded = true;
+    //    }
+    //    else
+    //    {
+    //        isGrounded = false;
+    //    }
+
+    //}
+
+
+
 
     public void setJumpKey(KeyCode key)
     {
