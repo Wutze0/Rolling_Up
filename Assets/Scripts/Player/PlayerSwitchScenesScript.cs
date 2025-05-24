@@ -7,31 +7,58 @@ public class PlayerSwitchScenesScript : MonoBehaviour
     public Collider2D newGamePlatformCollider;
     public Collider2D settingsPlatformCollider;
     public Collider2D loadGamePlatformCollider;
+    private bool isPaused;
+#nullable enable
+    public GameObject? pauseMenu; //nullable GameObject variable.
+#nullable disable
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (pauseMenu != null)
+        {
+            pauseMenu.SetActive(false);
+
+        }
+        //isInPauseScene = PlayerPrefs.GetInt("IsInPauseScene", 0) == 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape)) //If the player presses Escape, he will get redirected to the main menu
+        if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu != null)
         {
-            SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
+            isPaused = !isPaused;
 
+            if (isPaused)
+            {
+                pauseMenu.SetActive(true);
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1f;
+            }
         }
+        if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu == null)
+        {
+            SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+            Time.timeScale = 1f;
+            //DataPersistenceManager.instance.LoadGame();
+        }
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //depending on which platform the player touches, he gets redirected
-        if(collision.collider == newGamePlatformCollider)
+        if (collision.collider == newGamePlatformCollider)
         {
             SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         }
-        else if(collision.collider == settingsPlatformCollider)
+        else if (collision.collider == settingsPlatformCollider)
         {
             SceneManager.LoadScene("SettingsScene", LoadSceneMode.Single);
 

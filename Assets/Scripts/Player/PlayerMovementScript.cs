@@ -1,5 +1,4 @@
 using System.IO;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerMovementScript : MonoBehaviour, IDataPersistence
@@ -34,22 +33,22 @@ public class PlayerMovementScript : MonoBehaviour, IDataPersistence
     // Update is called once per frame
     void Update()
     {
-        if(_player.linearVelocityX == 0)
+        if (_player.linearVelocityX == 0)
         {
             _animator.speed = 0;
         }
-        else if(_player.linearVelocityX > 0)
+        else if (_player.linearVelocityX > 0)
         {
-            _animator.speed = _player.linearVelocityX /_sisyphosWalkingSpeedDivisor;
-           
+            _animator.speed = _player.linearVelocityX / _sisyphosWalkingSpeedDivisor;
+
         }
         else
         {
             _animator.speed = _player.linearVelocityX / -_sisyphosWalkingSpeedDivisor;
-            
+
         }
 
-        
+
         if (Input.GetKey(moveRight))
         {
             _buttonpressed = true;
@@ -139,7 +138,7 @@ public class PlayerMovementScript : MonoBehaviour, IDataPersistence
 
     private void saveKeybinds() //Method to save the changed keybinds
     {
-        File.WriteAllText(Application.dataPath + "/SaveFiles/Keybinds.txt", "moveLeft: " + moveLeft.ToString() + "\nmoveRight: " +  moveRight.ToString() + "\njumpKey: " + jumpScript.getJumpKey().ToString());        
+        File.WriteAllText(Application.dataPath + "/SaveFiles/Keybinds.txt", "moveLeft: " + moveLeft.ToString() + "\nmoveRight: " + moveRight.ToString() + "\njumpKey: " + jumpScript.getJumpKey().ToString());
     }
 
     public void LoadData(GameData data) //Add more data that needs to be saved.

@@ -1,6 +1,5 @@
-using System.IO;
-using UnityEngine;
 using Newtonsoft.Json;
+using System.IO;
 public class FileDataHandler
 {
     private string _dataDirPath = "";
@@ -12,7 +11,7 @@ public class FileDataHandler
         _dataFileName = dataFileName;
     }
 
-    public GameData Load() 
+    public GameData Load()
     {
         string fullFilePath = Path.Combine(_dataDirPath, _dataFileName); //Different OS's have different path separators.
 
@@ -24,19 +23,19 @@ public class FileDataHandler
                 string dataString = "";
 
                 dataString = File.ReadAllText(fullFilePath);
-                 
+
                 data = JsonConvert.DeserializeObject<GameData>(dataString); //Deserialize the GameData.
             }
-            catch 
+            catch
             {
-            
+
             }
 
         }
         return data;
     }
 
-    public void Save(GameData gameData) //wird noch nicht richtig serialiserirtt
+    public void Save(GameData gameData)
     {
         string fullFilePath = Path.Combine(_dataDirPath, _dataFileName); //Different OS's have different path separators.
         Directory.CreateDirectory(Path.GetDirectoryName(fullFilePath));
@@ -47,9 +46,9 @@ public class FileDataHandler
                         }); //Serialize all the GameData.
         File.WriteAllText(fullFilePath, serializedData);
 
-        
+
     }
 
-       
+
 
 }

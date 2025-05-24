@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaypointMover : MonoBehaviour, IDataPersistence
@@ -79,11 +79,22 @@ public class WaypointMover : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        if (data.movingPlatformPositions.ContainsKey(platformID) && data.currentWaypointIndices.ContainsKey(platformID))
+
+        try
         {
-            platform.transform.position = data.movingPlatformPositions[platformID];
-            currentWaypointIndex = Mathf.Clamp(data.currentWaypointIndices[platformID], 0, waypointParent.childCount - 1);
-            dataLoaded = true;
+            if (data.movingPlatformPositions.ContainsKey(platformID) && data.currentWaypointIndices.ContainsKey(platformID))
+            {
+                platform.transform.position = data.movingPlatformPositions[platformID];
+                currentWaypointIndex = Mathf.Clamp(data.currentWaypointIndices[platformID], 0, waypointParent.childCount - 1);
+                dataLoaded = true;
+            }
         }
+        catch (ArgumentNullException)
+        {
+
+        }
+
+
+
     }
 }

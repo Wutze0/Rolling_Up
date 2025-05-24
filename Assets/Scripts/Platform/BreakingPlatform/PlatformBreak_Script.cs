@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using System;
 
 public class PlatformBreak_Script : MonoBehaviour, IDataPersistence
 {
@@ -68,11 +67,11 @@ public class PlatformBreak_Script : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data) //Maybe find a way, so that only platforms that were falling are saved.
     {
-      
+
         data.fallingPlatformPositions[platformID] = rb.position;
         data.fallingPlatformStates[platformID] = isBreaking;
-        
-        
+
+
 
     }
     public void LoadData(GameData data)

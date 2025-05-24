@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerJumpScript : MonoBehaviour
@@ -15,7 +13,7 @@ public class PlayerJumpScript : MonoBehaviour
 
     void Update()
     {
-  
+
         if (Input.GetKeyDown(jumpKey) && (isGrounded || canFly))
         {
             _player.linearVelocityY = jumpHeight;
@@ -37,9 +35,9 @@ public class PlayerJumpScript : MonoBehaviour
         }
         if (collidingPlatformsAmount > 0)
         {
-            for(int i = 0; i < collision.GetContacts(collision.contacts); i++)
+            for (int i = 0; i < collision.GetContacts(collision.contacts); i++)
             {
-                if(collision.GetContact(i).normal.y <= 1 && collision.GetContact(i).normal.y > 0.5) //Check for each collision, if it is touching the top, if not the player is not on the ground.
+                if (collision.GetContact(i).normal.y <= 1 && collision.GetContact(i).normal.y > 0.5) //Check for each collision, if it is touching the top, if not the player is not on the ground.
                 {
                     isGrounded = true;
                     i = collision.GetContacts(collision.contacts) + 1; //Exit the for-loop.
