@@ -113,21 +113,35 @@ public class PlayerMovementScript : MonoBehaviour, IDataPersistence
 
     private void initializeKeybinds() //Method to get and set the set keybinds for the game.
     {
-        string content = File.ReadAllText(Application.persistentDataPath + "/Keybinds.txt");
-        string[] lines = new string[3];         //String size might have to be increased because we are not saving the jump button yet
-        lines = content.Split('\n', System.StringSplitOptions.RemoveEmptyEntries);
         string[] keys = new string[100]; //might have to change this
-
-        int i = 0;
-        foreach (string l in lines) //foreach to get all the actural keybinds
+        if (!File.Exists(Application.persistentDataPath + "/Keybinds.txt"))
         {
-            keys[i] = l.Split(':', System.StringSplitOptions.RemoveEmptyEntries)[1].Trim();
-            i++;
+            //File.Create(Application.persistentDataPath + "/Keybinds.txt");
+            File.WriteAllText(Application.persistentDataPath + "/Keybinds.txt", "moveLeft:" + KeyCode.A.ToString() + "\nmoveRight:" + KeyCode.D.ToString() + "\njumpKey:" + KeyCode.Space.ToString());
+            keys[0] = "A";
+            keys[1] = "D";
+            keys[2] = "Space";
         }
+        else
+        {
+            string content = File.ReadAllText(Application.persistentDataPath + "/Keybinds.txt");
+            string[] lines = new string[3];         //String size might have to be increased because we are not saving the jump button yet
+            lines = content.Split('\n', System.StringSplitOptions.RemoveEmptyEntries);
+           
 
+            int i = 0;
+            foreach (string l in lines) //foreach to get all the actural keybinds
+            {
+                keys[i] = l.Split(':', System.StringSplitOptions.RemoveEmptyEntries)[1].Trim();
+                i++;
+            }
+
+            
+        }
         setMoveLeftKey(stringToKeyCode(keys[0]));
         setMoveRightKey(stringToKeyCode(keys[1]));
         setJumpKey(stringToKeyCode(keys[2]));
+
     }
 
     private KeyCode stringToKeyCode(string key) //Method to parse a string to KeyCode
