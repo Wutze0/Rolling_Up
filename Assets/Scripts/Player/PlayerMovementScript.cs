@@ -8,7 +8,7 @@ public class PlayerMovementScript : MonoBehaviour, IDataPersistence
     public Animator _animator;
     public Transform _sisyphosTransform;
     private float _sisyphosWalkingSpeedDivisor = 10;
-    private const float stoneRotationSpeedMultiplier = 0.5f;
+    private const float stoneRotationSpeedMultiplier = 0.2f;
     private float timeDifference = 0;
     private bool _buttonpressed;
     private int direction;
