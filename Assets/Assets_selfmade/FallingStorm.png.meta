@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FallingStorm_0: 8768456360545584992
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

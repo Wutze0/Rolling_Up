@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      StormPlatform1_0: -1886606949292327438
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FallingIcePlatfrom_0: -8601621525358375890
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
