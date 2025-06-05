@@ -50,7 +50,6 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObject.LoadData(gameData);
         }
-        //Debug.Log(gameData.playerPosition);
         //TODO
     }
 

@@ -20,7 +20,6 @@ public class PlayerSwitchScenesScript : MonoBehaviour
             pauseMenu.SetActive(false);
 
         }
-        //isInPauseScene = PlayerPrefs.GetInt("IsInPauseScene", 0) == 1;
     }
 
     // Update is called once per frame
@@ -45,7 +44,6 @@ public class PlayerSwitchScenesScript : MonoBehaviour
         {
             SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
             Time.timeScale = 1f;
-            //DataPersistenceManager.instance.LoadGame();
         }
 
 
