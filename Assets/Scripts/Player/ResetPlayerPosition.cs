@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ResetPlayerPosition : MonoBehaviour
@@ -11,27 +10,27 @@ public class ResetPlayerPosition : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             Vector3 newPosition = new Vector3(startingXPos, startingYPos, startingZPos);
             other.transform.position = newPosition;
             other.attachedRigidbody.linearVelocityX = 0;
             other.attachedRigidbody.linearVelocityY = 0;
         }
-        
+
     }
 
 }

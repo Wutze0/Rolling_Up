@@ -24,12 +24,6 @@ public class OnButtonClickScript : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void onContinueButtonButtonClick()
     {
         PlayerPrefs.SetInt("IsInPauseScene", 0);

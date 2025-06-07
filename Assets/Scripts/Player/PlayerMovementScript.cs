@@ -152,7 +152,7 @@ public class PlayerMovementScript : MonoBehaviour, IDataPersistence
 
     private void saveKeybinds() //Method to save the changed keybinds
     {
-        File.WriteAllText(Application.persistentDataPath + "/Keybinds.txt", "moveLeft: " + moveLeft.ToString() + "\nmoveRight: " +  moveRight.ToString() + "\njumpKey: " + jumpScript.getJumpKey().ToString());        
+        File.WriteAllText(Application.persistentDataPath + "/Keybinds.txt", "moveLeft: " + moveLeft.ToString() + "\nmoveRight: " + moveRight.ToString() + "\njumpKey: " + jumpScript.getJumpKey().ToString());
     }
 
     public void LoadData(GameData data) //Add more data that needs to be saved.

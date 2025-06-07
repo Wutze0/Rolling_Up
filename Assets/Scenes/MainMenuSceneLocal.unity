@@ -244,6 +244,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -382,6 +383,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 627570288}
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3aa17a3302bcb49b0316a136c8fb57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetAspect: 1.7777778
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,6 +865,7 @@ MonoBehaviour:
   newGamePlatformCollider: {fileID: 1705928868}
   settingsPlatformCollider: {fileID: 1030678235}
   loadGamePlatformCollider: {fileID: 1652644920}
+  pauseMenu: {fileID: 0}
 --- !u!212 &1878303167
 SpriteRenderer:
   m_ObjectHideFlags: 0
