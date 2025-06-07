@@ -46,9 +46,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void LoadGame()
     {
         string slotFileName = fileName + PlayerPrefs.GetInt("SaveFileSlot") + ".json";
-
         FileDataHandler handler = new FileDataHandler(Application.persistentDataPath, slotFileName);
-
         gameData = handler.Load();
 
         if (gameData == null)

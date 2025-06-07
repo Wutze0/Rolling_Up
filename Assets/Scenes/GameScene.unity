@@ -7612,7 +7612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e72dce1c2b11fb429a49c5fe02b5cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: data.json
+  fileName: data
 --- !u!4 &1753338096
 Transform:
   m_ObjectHideFlags: 0
