@@ -13,6 +13,8 @@ public class GameData
     public Dictionary<string, bool> fallingPlatformStates = new Dictionary<string, bool>();
     public Dictionary<string, Vector3> movingPlatformPositions = new Dictionary<string, Vector3>();
     public Dictionary<string, int> currentWaypointIndices = new Dictionary<string, int>();
+    public float timer;
+    public bool isTiming;
 
 
 

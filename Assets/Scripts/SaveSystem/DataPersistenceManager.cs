@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class DataPersistenceManager : MonoBehaviour
@@ -30,17 +31,26 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
+
+        string slotFileName = $"data{PlayerPrefs.GetInt("SaveFileSlot")}.json";
+        FileDataHandler handler = new FileDataHandler(Application.persistentDataPath, slotFileName);
+
         foreach (IDataPersistence dataPersistenceObject in dataPersistenceObjects)
         {
             dataPersistenceObject.SaveData(gameData);
         }
 
-
-        fileDataHandler.Save(gameData);
+        handler.Save(gameData);
     }
+
     public void LoadGame()
     {
-        gameData = fileDataHandler.Load();
+        string slotFileName = fileName + PlayerPrefs.GetInt("SaveFileSlot") + ".json";
+
+        FileDataHandler handler = new FileDataHandler(Application.persistentDataPath, slotFileName);
+
+        gameData = handler.Load();
+
         if (gameData == null)
         {
             NewGame();
@@ -50,8 +60,10 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObject.LoadData(gameData);
         }
-        //TODO
+
+
     }
+
 
     private void OnApplicationQuit()
     {
@@ -74,4 +86,10 @@ public class DataPersistenceManager : MonoBehaviour
         return dataPersistenceObjects;
     }
 
+    public void DeleteSaveFile() 
+    {
+        string slotFileName = $"data{PlayerPrefs.GetInt("SaveFileSlot")}.json";
+
+        File.WriteAllText(Path.Combine(Application.persistentDataPath, slotFileName), "");
+    }
 }

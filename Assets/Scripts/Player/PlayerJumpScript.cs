@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerJumpScript : MonoBehaviour
@@ -11,11 +9,11 @@ public class PlayerJumpScript : MonoBehaviour
     private KeyCode jumpKey = KeyCode.Space;
     public bool isGrounded; //variable to prevent double jumping / jumping in the air
     public bool canFly = false;
-    private float steepnessOfJumpablePlatforms = (float) 0.2; //The lower the value, the steeper the platform can be to still be jumpable, e.g.0 = Wall, 0.1 very steep slope
+    private float steepnessOfJumpablePlatforms = (float)0.2; //The lower the value, the steeper the platform can be to still be jumpable, e.g.0 = Wall, 0.1 very steep slope
     private HashSet<Collider2D> groundedColliders = new HashSet<Collider2D>();
     void Update()
     {
-  
+
         if (Input.GetKeyDown(jumpKey) && (isGrounded || canFly))
         {
             _player.linearVelocityY = jumpHeight;

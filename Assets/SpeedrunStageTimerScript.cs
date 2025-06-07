@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class SpeedrunStageTimerScript : MonoBehaviour
+public class SpeedrunStageTimerScript : MonoBehaviour, IDataPersistence
 {
     public float timeLimit = 10f; // Time in seconds
     private float timer;
     private bool isTiming = false;
 
-    public Transform teleportTarget; 
-    public Transform player;         
+    public Transform teleportTarget;
+    public Transform player;
 
     void Update()
     {
@@ -36,7 +36,19 @@ public class SpeedrunStageTimerScript : MonoBehaviour
     void Fail()
     {
         isTiming = false;
-        player.position = teleportTarget.position; 
+        player.position = teleportTarget.position;
         player.rotation = teleportTarget.rotation;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.isTiming = isTiming;
+        data.timer = timer;
+    }
+
+    public void LoadData(GameData data)
+    {
+        timer = data.timer;
+        isTiming = data.isTiming;
     }
 }

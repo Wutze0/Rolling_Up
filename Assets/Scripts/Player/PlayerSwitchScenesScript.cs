@@ -61,5 +61,10 @@ public class PlayerSwitchScenesScript : MonoBehaviour
             SceneManager.LoadScene("SettingsScene", LoadSceneMode.Single);
 
         }
+        else if (collision.collider == loadGamePlatformCollider)
+        {
+            SceneManager.LoadScene("SaveFilesScene", LoadSceneMode.Single);
+
+        }
     }
 }
